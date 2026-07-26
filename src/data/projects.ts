@@ -63,7 +63,7 @@ export const projects: Project[] = [
     category: "AI Content",
     orientation: "vertical",
     video: "/videos/islamic-education.mp4.mp4",
-    videoType: "video/quicktime",
+    videoType:  "video/mp4",
     tags: ["AI Video", "Arabic", "Subtitles"],
   },
   {
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     category: "Video Editing",
     orientation: "horizontal",
     video: "/videos/marsa-alam-film.mp4.mp4",
-    videoType: "video/quicktime",
+    videoType:  "video/mp4",
     tags: ["Travel", "VFX", "Colour"],
   },
   {
