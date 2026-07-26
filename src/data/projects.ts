@@ -1,3 +1,8 @@
+import arabicPodcast from "@/assets/media/arabic-podcast.mp4.asset.json";
+import luxuryResort from "@/assets/media/luxury-resort-reel.mp4.asset.json";
+import islamicEducation from "@/assets/media/islamic-education.mov.asset.json";
+import marsaAlam from "@/assets/media/marsa-alam-film.mov.asset.json";
+
 export type ProjectCategory =
   | "Video Editing"
   | "AI Content"
@@ -28,6 +33,8 @@ export interface Project {
    * Video projects open in an accessible modal with native controls.
    */
   video?: string;
+  /** MIME type of the video source, e.g. "video/mp4" or "video/quicktime". */
+  videoType?: string;
   /** Optional poster image for the video, e.g. "/portfolio-assets/poster.jpg" */
   poster?: string;
   /** Optional downloadable document, e.g. "/portfolio-assets/feasibility-study.pdf" */
@@ -44,6 +51,8 @@ export const projects: Project[] = [
       "Vertical travel video with resort footage, captions, smooth pacing, and cinematic styling.",
     category: "Video Editing",
     orientation: "vertical",
+    video: luxuryResort.url,
+    videoType: "video/mp4",
     tags: ["CapCut", "Captions", "Reel"],
   },
   {
@@ -53,6 +62,8 @@ export const projects: Project[] = [
       "AI-assisted Arabic educational video featuring a 3D child character, subtitles, and visual storytelling.",
     category: "AI Content",
     orientation: "vertical",
+    video: islamicEducation.url,
+    videoType: "video/quicktime",
     tags: ["AI Video", "Arabic", "Subtitles"],
   },
   {
@@ -62,6 +73,8 @@ export const projects: Project[] = [
       "Short-form podcast edit with Arabic captions, clean cuts, and vertical social-media formatting.",
     category: "Video Editing",
     orientation: "vertical",
+    video: arabicPodcast.url,
+    videoType: "video/mp4",
     tags: ["Podcast", "Arabic Captions", "Shorts"],
   },
   {
@@ -80,6 +93,8 @@ export const projects: Project[] = [
       "Horizontal travel montage featuring Red Sea and boat footage with visual effects and cinematic editing.",
     category: "Video Editing",
     orientation: "horizontal",
+    video: marsaAlam.url,
+    videoType: "video/quicktime",
     tags: ["Travel", "VFX", "Colour"],
   },
   {
@@ -89,6 +104,8 @@ export const projects: Project[] = [
       "Verified ecommerce founder research with platform evidence, LinkedIn activity, public sources, and quality-control checks.",
     category: "Research",
     orientation: "horizontal",
+    file: "/documents/ecommerce-lead-generation-sample.xlsx",
+    fileLabel: "Download Excel Sample",
     tags: ["Lead Gen", "Verification", "Excel"],
   },
   {
@@ -98,6 +115,8 @@ export const projects: Project[] = [
       "Arabic business plan covering market entry, ecommerce operations, legal setup, imports, and implementation.",
     category: "Business Documents",
     orientation: "horizontal",
+    file: "/documents/oman-ecommerce-business-plan.pdf",
+    fileLabel: "View Business Plan",
     tags: ["Business Plan", "Arabic", "Word"],
   },
   {
@@ -107,6 +126,8 @@ export const projects: Project[] = [
       "Business feasibility study with market analysis, estimated costs, pricing, break-even calculations, roadmap, and risks.",
     category: "Data & Excel",
     orientation: "horizontal",
+    file: "/documents/oman-ecommerce-feasibility-study.pdf",
+    fileLabel: "View Feasibility Study",
     tags: ["Feasibility", "Excel", "Break-even"],
   },
 ];
