@@ -1,12 +1,9 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import { site } from "@/data/site";
 import { Reveal } from "./Reveal";
+import profilePic from "@/assets/profile-pic.png.asset.json";
 
-/**
- * To use a real profile photo, add it to `public/portfolio-assets/profile.jpg`
- * and set PROFILE_IMAGE below. The monogram frame is used until then.
- */
-const PROFILE_IMAGE: string | null = null;
+const PROFILE_IMAGE: string = profilePic.url;
 
 export function Hero() {
   return (
@@ -49,22 +46,13 @@ export function Hero() {
               className="absolute -inset-6 rounded-full bg-[conic-gradient(from_140deg,var(--cyan-glow),var(--purple-glow),var(--emerald-glow),var(--cyan-glow))] opacity-30 blur-3xl"
             />
             <div className="glass-panel relative grid size-56 place-items-center rounded-full sm:size-72">
-              {PROFILE_IMAGE ? (
-                <img
-                  src={PROFILE_IMAGE}
-                  alt="Hozifa Mohammad"
-                  loading="eager"
-                  className="relative z-10 size-[92%] rounded-full object-cover"
-                />
-              ) : (
-                <span
-                  role="img"
-                  aria-label="Hozifa Mohammad"
-                  className="text-gradient relative z-10 text-6xl font-semibold tracking-tight sm:text-7xl"
-                >
-                  HM
-                </span>
-              )}
+              <img
+                src={PROFILE_IMAGE}
+                alt="Hozifa Mohammad"
+                loading="eager"
+                decoding="async"
+                className="relative z-10 size-[92%] rounded-full object-cover"
+              />
             </div>
           </div>
         </Reveal>
