@@ -53,6 +53,8 @@ export function Projects() {
   const isVideo = (project: Project) =>
     project.category === "Video Editing" || project.category === "AI Content";
 
+  const hasModal = (project: Project) => Boolean(project.video) || !isVideo(project);
+
   return (
     <Section
       id="projects"
@@ -99,14 +101,18 @@ export function Projects() {
                     ))}
                   </ul>
                   <div className="mt-5 flex flex-wrap gap-2 pt-1">
-                    {isVideo(project) ? (
+                    {!hasModal(project) ? (
+                      <span className="glass-soft inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-muted-foreground">
+                        Available on request
+                      </span>
+                    ) : isVideo(project) ? (
                       <button
                         type="button"
                         onClick={() => setOpenProject(project)}
                         className="gloss glass-soft inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors hover:border-primary/50"
                       >
                         <Play className="size-3.5" aria-hidden="true" />
-                        {project.video ? "Play video" : "Preview"}
+                        Play video
                         <span className="sr-only"> — {project.title}</span>
                       </button>
                     ) : (
@@ -136,15 +142,30 @@ export function Projects() {
         {openProject ? (
           <div className="space-y-4">
             {openProject.video ? (
-              <video
-                controls
-                preload="metadata"
-                poster={openProject.poster}
-                className="w-full rounded-2xl bg-background"
-              >
-                <source src={openProject.video} />
-                Your browser does not support the video tag.
-              </video>
+              <div className="space-y-3">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={openProject.poster}
+                  className="max-h-[65dvh] w-full rounded-2xl bg-background"
+                >
+                  <source src={openProject.video} type={openProject.videoType} />
+                  Your browser does not support the video tag.
+                </video>
+                <p className="text-xs text-muted-foreground">
+                  Video not playing?{" "}
+                  <a
+                    href={openProject.video}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline underline-offset-4"
+                  >
+                    Open the original file
+                  </a>
+                  .
+                </p>
+              </div>
             ) : (
               <div className="glass-soft rounded-2xl p-6 text-center">
                 <ProjectPreview project={openProject} />
