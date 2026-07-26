@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Mail, MessageCircle, Phone } from "lucide-react";
 import { contact } from "@/data/site";
+import { handleLinkClick } from "@/lib/open-link";
 import { Reveal } from "./Reveal";
 
 const links = [
@@ -28,6 +29,7 @@ export function Contact() {
                 <li key={link.label} className="group relative">
                   <a
                     href={link.href}
+                    onClick={handleLinkClick(link.href, link.external)}
                     aria-label={`${link.label}: ${link.value}`}
                     {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="gloss glass-soft grid size-14 place-items-center rounded-2xl text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:text-foreground"
@@ -45,10 +47,19 @@ export function Contact() {
             </ul>
 
             <div className="mt-10 flex flex-col items-center gap-2 text-sm text-muted-foreground">
-              <a href={`mailto:${contact.email}`} className="transition-colors hover:text-foreground">
+              <a
+                href={`mailto:${contact.email}`}
+                onClick={handleLinkClick(`mailto:${contact.email}`, false)}
+                className="transition-colors hover:text-foreground"
+              >
                 {contact.email}
               </a>
-              <a href={`tel:${contact.phone}`} className="transition-colors hover:text-foreground" dir="ltr">
+              <a
+                href={`tel:${contact.phone}`}
+                onClick={handleLinkClick(`tel:${contact.phone}`, false)}
+                className="transition-colors hover:text-foreground"
+                dir="ltr"
+              >
                 {contact.phone}
               </a>
             </div>
