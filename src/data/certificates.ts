@@ -1,12 +1,21 @@
-import openai from "@/assets/cert-openai-ai-foundations.png.asset.json";
-import arc from "@/assets/cert-arc-english.png.asset.json";
-import aiFluency from "@/assets/cert-anthropic-ai-fluency.png.asset.json";
-import claude101 from "@/assets/cert-anthropic-claude-101.png.asset.json";
-import js1 from "@/assets/cert-tofas-js-1.png.asset.json";
-import js2 from "@/assets/cert-tofas-js-2.png.asset.json";
-import capcut from "@/assets/cert-courssat-capcut.png.asset.json";
-import communication from "@/assets/cert-yanfaa-communication.png.asset.json";
-import marketing from "@/assets/cert-m3aarf-marketing.png.asset.json";
+import openai from "@/assets/certs/openai-ai-foundations.png.asset.json";
+import arc from "@/assets/certs/arc-english-103.png.asset.json";
+import aiFluencyPreview from "@/assets/certs/ai-fluency-preview.jpg.asset.json";
+import aiFluencyPdf from "@/assets/certs/ai-fluency.pdf.asset.json";
+import claudePreview from "@/assets/certs/claude-101-preview.jpg.asset.json";
+import claudePdf from "@/assets/certs/claude-101.pdf.asset.json";
+import capcutPreview from "@/assets/certs/capcut-preview.jpg.asset.json";
+import capcutPdf from "@/assets/certs/capcut.pdf.asset.json";
+import edraakPreview from "@/assets/certs/edraak-ai-preview.jpg.asset.json";
+import edraakPdf from "@/assets/certs/edraak-ai.pdf.asset.json";
+import communicationPreview from "@/assets/certs/communication-preview.jpg.asset.json";
+import communicationPdf from "@/assets/certs/communication.pdf.asset.json";
+import marketingPreview from "@/assets/certs/marketing-preview.jpg.asset.json";
+import marketingPdf from "@/assets/certs/marketing.pdf.asset.json";
+import js2Preview from "@/assets/certs/js-2-preview.jpg.asset.json";
+import js2Pdf from "@/assets/certs/js-2.pdf.asset.json";
+import js1Preview from "@/assets/certs/js-1-preview.jpg.asset.json";
+import js1Pdf from "@/assets/certs/js-1.pdf.asset.json";
 
 export const certificateFilters = [
   "All",
@@ -14,7 +23,6 @@ export const certificateFilters = [
   "Video & Photography",
   "Communication & Marketing",
   "Programming",
-  "Productivity & Office",
 ] as const;
 
 export type CertificateFilter = (typeof certificateFilters)[number];
@@ -25,8 +33,10 @@ export interface Certificate {
   title: string;
   issuer: string;
   category: CertificateCategory;
-  /** Certificate image URL, when available. */
-  image?: string;
+  /** Preview image of the certificate. */
+  image: string;
+  /** Original PDF, when the certificate was issued as a PDF. */
+  pdf?: string;
 }
 
 export const certificates: Certificate[] = [
@@ -38,89 +48,74 @@ export const certificates: Certificate[] = [
     image: openai.url,
   },
   {
-    id: "arc-english-103",
-    title: "103 Foundations of English",
-    issuer: "ARC",
-    category: "Communication & Marketing",
-    image: arc.url,
-  },
-  {
     id: "anthropic-ai-fluency",
     title: "AI Fluency: AI Capabilities & Limitations",
     issuer: "Anthropic",
     category: "Artificial Intelligence",
-    image: aiFluency.url,
+    image: aiFluencyPreview.url,
+    pdf: aiFluencyPdf.url,
   },
   {
     id: "anthropic-claude-101",
     title: "Claude 101",
     issuer: "Anthropic",
     category: "Artificial Intelligence",
-    image: claude101.url,
-  },
-  {
-    id: "tofas-javascript-1",
-    title: "JavaScript Level 1",
-    issuer: "TOFAS",
-    category: "Programming",
-    image: js1.url,
-  },
-  {
-    id: "tofas-javascript-2",
-    title: "JavaScript Level 2",
-    issuer: "TOFAS",
-    category: "Programming",
-    image: js2.url,
-  },
-  {
-    id: "edraak-intro-ai",
-    title: "Introduction to Artificial Intelligence",
-    issuer: "Edraak",
-    category: "Artificial Intelligence",
+    image: claudePreview.url,
+    pdf: claudePdf.url,
   },
   {
     id: "courssat-capcut",
     title: "CapCut and AI Short-Video Production",
     issuer: "Courssat Plus",
     category: "Video & Photography",
-    image: capcut.url,
+    image: capcutPreview.url,
+    pdf: capcutPdf.url,
   },
   {
-    id: "yanfaa-photography",
-    title: "Photography Basics",
-    issuer: "Yanfaa",
-    category: "Video & Photography",
+    id: "edraak-intro-ai",
+    title: "Introduction to Artificial Intelligence",
+    issuer: "Edraak",
+    category: "Artificial Intelligence",
+    image: edraakPreview.url,
+    pdf: edraakPdf.url,
   },
   {
     id: "yanfaa-communication",
     title: "Communication Skills",
     issuer: "Yanfaa",
     category: "Communication & Marketing",
-    image: communication.url,
-  },
-  {
-    id: "yanfaa-mobile-photography",
-    title: "Mobile Photography Basics",
-    issuer: "Yanfaa",
-    category: "Video & Photography",
+    image: communicationPreview.url,
+    pdf: communicationPdf.url,
   },
   {
     id: "m3aarf-marketing",
     title: "Learn Marketing",
     issuer: "M3aarf",
     category: "Communication & Marketing",
-    image: marketing.url,
+    image: marketingPreview.url,
+    pdf: marketingPdf.url,
   },
   {
-    id: "m3aarf-time-management",
-    title: "Time Management Skills",
-    issuer: "M3aarf",
-    category: "Productivity & Office",
+    id: "tofas-javascript-2",
+    title: "JavaScript Level 2",
+    issuer: "TOFAS",
+    category: "Programming",
+    image: js2Preview.url,
+    pdf: js2Pdf.url,
   },
   {
-    id: "mindluster-letterhead",
-    title: "Create a Letterhead in Microsoft Word",
-    issuer: "Mind Luster",
-    category: "Productivity & Office",
+    id: "tofas-javascript-1",
+    title: "JavaScript Level 1",
+    issuer: "TOFAS",
+    category: "Programming",
+    image: js1Preview.url,
+    pdf: js1Pdf.url,
+  },
+  {
+    id: "arc-english-103",
+    title: "103 Foundations of English",
+    issuer: "ARC",
+    category: "Communication & Marketing",
+    image: arc.url,
   },
 ];
