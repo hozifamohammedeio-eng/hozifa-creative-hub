@@ -170,7 +170,9 @@ export function Projects() {
               <div className="glass-soft rounded-2xl p-6 text-center">
                 <ProjectPreview project={openProject} />
                 <p className="mt-5 text-sm text-muted-foreground">
-                  The final file for this project is not published here yet. It can be shared on request.
+                  {openProject.file
+                    ? "Open the attached file below to see the full deliverable."
+                    : "The final file for this project is not published here yet. It can be shared on request."}
                 </p>
               </div>
             )}
