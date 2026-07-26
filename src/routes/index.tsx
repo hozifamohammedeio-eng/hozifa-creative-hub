@@ -1,24 +1,70 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Background } from "@/components/portfolio/Background";
+import { Nav } from "@/components/portfolio/Nav";
+import { Hero } from "@/components/portfolio/Hero";
+import { About } from "@/components/portfolio/About";
+import { Services } from "@/components/portfolio/Services";
+import { Projects } from "@/components/portfolio/Projects";
+import { Skills } from "@/components/portfolio/Skills";
+import { Certificates } from "@/components/portfolio/Certificates";
+import { Process } from "@/components/portfolio/Process";
+import { Feedback } from "@/components/portfolio/Feedback";
+import { Contact } from "@/components/portfolio/Contact";
+import { Footer } from "@/components/portfolio/Footer";
+import { contact, site } from "@/data/site";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Hozifa Mohammad — Video Editor & AI Content Creator";
+const description =
+  "Freelance video editor, AI content creator and research specialist in Alexandria, Egypt. Short-form video, AI-assisted content, verified research, data and business documents.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "profile" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: site.name,
+          jobTitle: site.title,
+          email: `mailto:${contact.email}`,
+          telephone: contact.phone,
+          address: { "@type": "PostalAddress", addressLocality: "Alexandria", addressCountry: "EG" },
+          sameAs: [contact.linkedin, contact.instagram],
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="relative min-h-dvh w-full overflow-x-hidden">
+      <Background />
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Projects />
+        <Skills />
+        <Certificates />
+        <Process />
+        <Feedback />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
