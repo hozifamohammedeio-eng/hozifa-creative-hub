@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Award, Maximize2 } from "lucide-react";
+import { FileText, Maximize2 } from "lucide-react";
 import {
   certificateFilters,
   certificates,
@@ -57,19 +57,13 @@ export function Certificates() {
                   className="group relative block w-full overflow-hidden rounded-2xl"
                   aria-label={`Open larger preview of ${certificate.title}`}
                 >
-                  {certificate.image ? (
-                    <img
-                      src={certificate.image}
-                      alt={`${certificate.title} certificate issued by ${certificate.issuer}`}
-                      loading="lazy"
-                      decoding="async"
-                      className="aspect-[4/3] w-full bg-glass object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <div className="grid aspect-[4/3] w-full place-items-center bg-linear-to-br from-cyan-glow/20 to-purple-glow/20">
-                      <Award className="size-9 text-foreground/70" aria-hidden="true" />
-                    </div>
-                  )}
+                  <img
+                    src={certificate.image}
+                    alt={`${certificate.title} certificate issued by ${certificate.issuer}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[4/3] w-full bg-glass object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                   <span className="glass-soft absolute top-3 right-3 grid size-8 place-items-center rounded-full opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                     <Maximize2 className="size-3.5" aria-hidden="true" />
                   </span>
@@ -80,6 +74,17 @@ export function Certificates() {
                   <p className="mt-3 text-[11px] tracking-wide text-primary/80 uppercase">
                     {certificate.category}
                   </p>
+                  <div className="mt-4 flex pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setOpen(certificate)}
+                      className="gloss glass-soft inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors hover:border-primary/50"
+                    >
+                      <Maximize2 className="size-3.5" aria-hidden="true" />
+                      View Certificate
+                      <span className="sr-only"> — {certificate.title}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </article>
@@ -90,20 +95,26 @@ export function Certificates() {
       <Modal open={open !== null} onClose={() => setOpen(null)} title={open?.title ?? ""}>
         {open ? (
           <div className="space-y-4">
-            {open.image ? (
-              <img
-                src={open.image}
-                alt={`${open.title} certificate issued by ${open.issuer}`}
-                className="mx-auto max-h-[65dvh] w-full rounded-2xl bg-glass object-contain"
-              />
-            ) : (
-              <div className="glass-soft grid aspect-video w-full place-items-center rounded-2xl">
-                <Award className="size-10 text-foreground/70" aria-hidden="true" />
-              </div>
-            )}
+            <img
+              src={open.image}
+              alt={`${open.title} certificate issued by ${open.issuer}`}
+              decoding="async"
+              className="mx-auto max-h-[65dvh] w-full rounded-2xl bg-glass object-contain"
+            />
             <p className="text-sm text-muted-foreground">
               {open.issuer} · {open.category}
             </p>
+            {open.pdf ? (
+              <a
+                href={open.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gloss glass-soft inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors hover:border-primary/50"
+              >
+                <FileText className="size-3.5" aria-hidden="true" />
+                Open Original PDF
+              </a>
+            ) : null}
           </div>
         ) : null}
       </Modal>
